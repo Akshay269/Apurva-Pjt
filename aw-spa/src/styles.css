@@ -1,0 +1,76 @@
+:root{
+  --bg: #0f0f10;
+  --surface: #17181a;
+  --text: #e9eef3;
+  --muted: #b4bdc6;
+  --primary: #6c8bfd;
+  --accent: #9c6cfb;
+}
+*{box-sizing:border-box}
+html,body,#root{height:100%}
+html{scroll-behavior:smooth}
+body{
+  margin:0; font-family: Inter, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu, Cantarell, 'Helvetica Neue', Arial, 'Apple Color Emoji','Segoe UI Emoji','Segoe UI Symbol';
+  color:var(--text); background:var(--bg);
+}
+
+.container{width:min(1120px, 92%); margin-inline:auto}
+.section{padding:72px 0}
+.section--light{background:#f4f6f8; color:#1e2227}
+.section--primary{background:linear-gradient(180deg, #0f0f10 0%, #1a1c1f 100%)}
+
+.grid{display:grid; gap:24px}
+.grid--2{grid-template-columns:1fr;}
+@media(min-width: 900px){ .grid--2{grid-template-columns: 1fr 1fr;} }
+
+.prose h2{margin:0 0 12px; font-size:40px}
+.prose p{color:var(--muted); line-height:1.7}
+.feature h3{margin:24px 0 4px}
+.feature p{margin:0; color:var(--muted)}
+
+/* Navbar */
+.navbar{position:fixed; inset:0 0 auto; height:64px; display:flex; align-items:center; z-index:50; transition:background .25s ease, box-shadow .25s ease;}
+.navbar--scrolled{background:rgba(15,16,18,.6); backdrop-filter:saturate(120%) blur(8px); box-shadow: 0 1px 0 rgba(255,255,255,0.06)}
+.navbar__inner{width:min(1120px, 92%); margin:auto; display:flex; align-items:center; justify-content:space-between}
+.brand{font-weight:700; color:var(--text); text-decoration:none}
+.nav a{color:var(--text); text-decoration:none; margin-left:20px; opacity:.9}
+.nav a:hover{opacity:1}
+
+/* Hero */
+.section--hero{position:relative; min-height:100vh; display:flex; align-items:center;}
+.hero__media{position:absolute; inset:0; overflow:hidden}
+.hero__video{width:100%; height:100%; object-fit:cover; opacity:.65}
+.hero__overlay{position:absolute; inset:0; background:radial-gradient(1200px 600px at 20% 10%, rgba(108,139,253,.35), transparent), radial-gradient(1200px 600px at 80% 10%, rgba(156,108,251,.25), transparent);}
+.hero__content{position:relative; z-index:1; text-align:left}
+.hero__title{font-size: clamp(36px, 6vw, 64px); margin:0 0 8px}
+.hero__subtitle{color:#dce3ea; max-width:680px; margin:0 0 24px}
+
+.btn{display:inline-flex; align-items:center; gap:8px; padding:12px 18px; border-radius:10px; text-decoration:none; cursor:pointer}
+.btn--primary{background:var(--primary); color:white}
+.btn--dark{background:#111; color:#fff; border:1px solid #222}
+
+.media-card{background:var(--surface); border-radius:16px; min-height:320px}
+.placeholder-art{background:linear-gradient(135deg,#e9d9b0,#d8e0d6)}
+.placeholder-sun{background:linear-gradient(135deg,#f9caa7,#f5e8d7)}
+
+/* Carousel */
+.carousel{position:relative; display:flex; align-items:center; gap:8px;}
+.carousel__track{display:flex; gap:16px; overflow-x:auto; scroll-snap-type:x mandatory; padding:8px;}
+.carousel__item{flex:0 0 auto; width:min(80vw, 360px); scroll-snap-align:center; background:#111; border-radius:12px; overflow:hidden;}
+.carousel__item img,.carousel__item video{display:block; width:100%; height:240px; object-fit:cover}
+.carousel__item figcaption{padding:8px 10px; color:#cdd6df; font-size:14px}
+.carousel__btn{height:40px; width:40px; border-radius:999px; border:1px solid #333; background:#0f0f10; color:#fff}
+
+/* Contact */
+.contact-form input, .contact-form select, .contact-form textarea{width:100%; padding:12px 14px; border-radius:10px; border:1px solid #cfd6de; background:#fff; color:#111}
+.contact-form button{margin-top:10px}
+.subtitle{color:var(--muted)}
+.help-box{margin-top:16px; padding:16px; background:#fff; border:1px solid #e1e6ec; border-radius:12px}
+
+/* Footer */
+.footer{border-top:1px solid rgba(255,255,255,.08); padding:18px 0; background:#0f0f10}
+.footer__inner{display:flex; align-items:center; justify-content:space-between}
+.footer__links a{color:#cbd5e1; margin-left:16px; text-decoration:none}
+
+/* Spacing fix so hero not under navbar */
+.app-root main{padding-top:64px}

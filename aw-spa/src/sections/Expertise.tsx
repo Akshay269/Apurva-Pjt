@@ -1,18 +1,48 @@
+import { useEffect, useRef, useState } from "react";
+
 export const Expertise = () => {
+  const contentRef = useRef<HTMLDivElement | null>(null);
+  const [visible, setVisible] = useState(false);
+
+  useEffect(() => {
+    const el = contentRef.current;
+    if (!el) return;
+    const obs = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => setVisible(entry.isIntersecting));
+      },
+      { threshold: 0.2 }
+    );
+    obs.observe(el);
+    return () => obs.disconnect();
+  }, []);
+
   return (
     <section id="expertise" className="section">
       <div className="container grid grid--2">
-        <div className="prose">
+        <div className="expertise__image">
+          <img src="/src/assets/images/expertise.png" alt="Expertise visual" />
+        </div>
+        <div
+          ref={contentRef}
+          className={`prose expertise__content ${visible ? "is-visible" : ""}`}
+        >
           <h2>Our Expertise</h2>
           <p>Design is our language. Execution is our promise.</p>
 
           <div className="feature">
             <h3>Visualize Before You Build</h3>
-            <p>Stunning 3D renders & facade concepts that help you see the future.</p>
+            <p>
+              Stunning 3D renders & facade concepts that help you see the
+              future.
+            </p>
           </div>
           <div className="feature">
             <h3>Architecture that Breathes</h3>
-            <p>Thoughtfully planned spaces — from urban homes to countryside retreats.</p>
+            <p>
+              Thoughtfully planned spaces — from urban homes to countryside
+              retreats.
+            </p>
           </div>
           <div className="feature">
             <h3>Design. Build. Deliver.</h3>
@@ -27,8 +57,7 @@ export const Expertise = () => {
             <p>Working closely with clients to co‑create, not just deliver.</p>
           </div>
         </div>
-        <div className="media-card placeholder-sun" aria-hidden />
       </div>
     </section>
-  )
-}
+  );
+};

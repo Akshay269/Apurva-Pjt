@@ -16,9 +16,9 @@ export const Navbar = () => {
         <a href="#intro" className="brand">A.W Designers</a>
         <nav className="nav">
           <a href="#intro">Intro</a>
-          <a href="#expertise">What I Do</a>
-          <a href="#about">Who I Am</a>
-          <a href="#work">My Work</a>
+          <a href="#about">About Us</a>
+          <a href="#expertise">Our Expertise</a>
+          <a href="#work">Our Creation</a>
           <a href="#contact">Contact</a>
         </nav>
       </div>

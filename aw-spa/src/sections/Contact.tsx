@@ -2,7 +2,7 @@ export const Contact = () => {
   return (
     <section id="contact" className="section section--light">
       <div className="container grid grid--2">
-        <div>
+        <div className="contact-form-1">
           <h2>Contact Us</h2>
           <p className="subtitle">Ready to bring your vision to life? Let's start the conversation.</p>
 
@@ -24,7 +24,7 @@ export const Contact = () => {
           </div>
         </div>
         <form className="contact-form" onSubmit={(e) => e.preventDefault()}>
-          <div className="grid grid--2">
+          <div className="grid grid--2" >
             <input required placeholder="Full Name *" />
             <input type="email" required placeholder="Email Address *" />
           </div>

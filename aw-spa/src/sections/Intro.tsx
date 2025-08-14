@@ -26,7 +26,7 @@ export const Intro = () => {
 
         <TypingText texts={["Envision", "Design", "Build"]} speed={100} />
 
-        <a href="#work" className="btn btn--primary">
+        <a href="#work" className="btn--dark">
           See Work
         </a>
       </div>

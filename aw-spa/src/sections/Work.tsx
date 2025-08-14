@@ -84,9 +84,9 @@ export const Work = () => {
   return (
     <section id="work" className="section section--primary">
       <div className="container">
-        <header className="section-header">
-          <h2>Our Creation</h2>
-        </header>
+        
+          <h2 className="prose h2">Our Creation</h2>
+
 
         <div className="tabs">
           <button

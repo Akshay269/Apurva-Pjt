@@ -1,19 +1,28 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState } from "react";
 
 export const Navbar = () => {
-  const [isScrolled, setIsScrolled] = useState(false)
+  const [isScrolled, setIsScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setIsScrolled(window.scrollY > 8)
-    onScroll()
-    window.addEventListener('scroll', onScroll, { passive: true })
-    return () => window.removeEventListener('scroll', onScroll)
-  }, [])
+    const onScroll = () => setIsScrolled(window.scrollY > 8);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, []);
 
   return (
-    <header className={`navbar ${isScrolled ? 'navbar--scrolled' : ''}`}>
+    <header className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`}>
       <div className="navbar__inner">
-        <a href="#intro" className="brand">A.W Designers</a>
+        <div>
+          <img
+            src="/src/assets/images/LOGO_WHITE.png"
+            style={{ width: "90px", height: "auto" }}
+            alt="Studio / project collage"
+          />
+          <a href="#intro" className="brand">
+            A.W Designers
+          </a>
+        </div>
         <nav className="nav">
           <a href="#intro">Intro</a>
           <a href="#about">About Us</a>
@@ -23,5 +32,5 @@ export const Navbar = () => {
         </nav>
       </div>
     </header>
-  )
-}
+  );
+};

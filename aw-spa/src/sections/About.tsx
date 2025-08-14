@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-
+import about from "../assets/images/about.png";
 export const About = () => {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
@@ -48,7 +48,7 @@ export const About = () => {
           </p>
         </div>
         <div className="about__image">
-          <img src="/src/assets/images/about.png" alt="Studio / project collage" />
+          <img src={about} alt="Studio / project collage" />
         </div>
       </div>
     </section>

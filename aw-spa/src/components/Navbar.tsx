@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import LOGO_WHITE from "../assets/images/LOGO_WHITE.png";
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -15,7 +16,7 @@ export const Navbar = () => {
       <div className="navbar__inner">
         <div>
           <img
-            src="/src/assets/images/LOGO_WHITE.png"
+            src={LOGO_WHITE}
             style={{ width: "90px", height: "auto" }}
             alt="Studio / project collage"
           />

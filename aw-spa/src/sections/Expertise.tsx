@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import expertise from "../assets/images/expertise.png";
 
 export const Expertise = () => {
   const contentRef = useRef<HTMLDivElement | null>(null);
@@ -21,7 +22,7 @@ export const Expertise = () => {
     <section id="expertise" className="section">
       <div className="container grid grid--2">
         <div className="expertise__image">
-          <img src="/src/assets/images/expertise.png" alt="Expertise visual" />
+          <img src={expertise} alt="Expertise visual" />
         </div>
         <div
           ref={contentRef}

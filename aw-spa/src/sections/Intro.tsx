@@ -1,5 +1,6 @@
 //import Animated Text
 import TypingText from "../components/TypingText";
+import herovideo from "../../public/assets/videos/Hero.mp4";
 
 export const Intro = () => {
   return (
@@ -17,7 +18,7 @@ export const Intro = () => {
           playsInline
           poster="/hero-poster.jpg"
         >
-          <source src="/src/assets/videos/Hero.mp4" type="video/mp4" />
+          <source src={herovideo} type="video/mp4" />
         </video>
       </div>
       <div className="hero__overlay" />

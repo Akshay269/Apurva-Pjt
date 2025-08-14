@@ -457,3 +457,7 @@ body {
   .lightbox__inner{width:100vw; height:100vh; border-radius:0}
   .lightbox__toolbar{top:auto; bottom:12px; right:50%; transform:translateX(50%)}
 }
+
+@media(max-width: 900px){
+  .about__image, .expertise__image{display:none}
+}

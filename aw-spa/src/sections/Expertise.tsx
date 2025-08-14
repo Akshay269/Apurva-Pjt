@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import expertise from "../../public/assets/images/expertise.png";
+import expertise from "/assets/images/expertise.png";
 
 export const Expertise = () => {
   const contentRef = useRef<HTMLDivElement | null>(null);

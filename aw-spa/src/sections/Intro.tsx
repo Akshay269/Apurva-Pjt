@@ -1,6 +1,6 @@
 //import Animated Text
 import TypingText from "../components/TypingText";
-import herovideo from "../../public/assets/videos/Hero.mp4";
+import herovideo from "/assets/videos/Hero.mp4";
 
 export const Intro = () => {
   return (

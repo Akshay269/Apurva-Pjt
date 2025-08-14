@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import about from "../../public/assets/images/about.png";
+import about from "/assets/images/about.png";
 export const About = () => {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);

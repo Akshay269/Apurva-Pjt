@@ -1,4 +1,4 @@
-//import Animated Text
+
 import TypingText from "../components/TypingText";
 import herovideo from "/assets/videos/Hero.mp4";
 
@@ -27,9 +27,7 @@ export const Intro = () => {
 
         <TypingText texts={["Envision", "Design", "Build"]} speed={100} />
 
-        <a href="#work" className="btn--dark">
-          See Work
-        </a>
+        <button className="see-work-btn" onClick={() => window.location.href="#work"}>See Work</button>
       </div>
     </section>
   );

@@ -461,3 +461,27 @@ body {
 @media(max-width: 900px){
   .about__image, .expertise__image{display:none}
 }
+
+/* Swipe hint */
+.swipe-hint{position:absolute; display:inline-flex; align-items:center; gap:8px; padding:8px 12px; border-radius:999px; background:rgba(20,22,26,.6); border:1px solid rgba(255,255,255,.08); color:#e9eef3; font-size:12px; line-height:1; pointer-events:none; backdrop-filter: blur(6px); box-shadow: 0 6px 18px rgba(0,0,0,.25); z-index:5}
+.swipe-hint__icon{position:relative; display:inline-flex; align-items:center; justify-content:center; gap:6px; min-width:36px}
+.swipe-hint__label{opacity:.9}
+.swipe-hint__dot{width:8px; height:8px; border-radius:999px; background: radial-gradient(circle at 30% 30%, #fff, rgba(255,255,255,.6)); box-shadow: 0 0 0 4px rgba(255,255,255,.06)}
+.swipe-hint__chev{font-size:16px; color:#e9eef3; opacity:.35}
+@keyframes swipe-lr-dot{ 0%{ transform: translateX(-12px)} 50%{ transform: translateX(12px)} 100%{ transform: translateX(-12px)} }
+@keyframes swipe-ud-dot{ 0%{ transform: translateY(-8px)} 50%{ transform: translateY(8px)} 100%{ transform: translateY(-8px)} }
+@keyframes chev-left{ 0%{ transform: translateX(8px); opacity:.15 } 50%{ transform: translateX(0); opacity:1 } 100%{ transform: translateX(8px); opacity:.15 } }
+@keyframes chev-right{ 0%{ transform: translateX(-8px); opacity:.15 } 50%{ transform: translateX(0); opacity:1 } 100%{ transform: translateX(-8px); opacity:.15 } }
+@keyframes chev-up{ 0%{ transform: translateY(6px); opacity:.15 } 50%{ transform: translateY(0); opacity:1 } 100%{ transform: translateY(6px); opacity:.15 } }
+@keyframes chev-down{ 0%{ transform: translateY(-6px); opacity:.15 } 50%{ transform: translateY(0); opacity:1 } 100%{ transform: translateY(-6px); opacity:.15 } }
+.swipe-hint--left-right .swipe-hint__dot{animation: swipe-lr-dot 1.6s ease-in-out infinite}
+.swipe-hint--left-right .swipe-hint__chev--left{animation: chev-left 1.6s ease-in-out infinite}
+.swipe-hint--left-right .swipe-hint__chev--right{animation: chev-right 1.6s ease-in-out infinite}
+.swipe-hint--up-down .swipe-hint__dot{animation: swipe-ud-dot 1.6s ease-in-out infinite}
+.swipe-hint--up-down .swipe-hint__chev--left{display:none}
+.swipe-hint--up-down .swipe-hint__chev--right{display:none}
+@media(min-width:901px){ .swipe-hint{ display:none } }
+/* Placement helpers */
+.swipe-hint--hero{ left:50%; bottom:24px; transform: translateX(-50%) }
+.swipe-hint--carousel{ right:8px; bottom:8px }
+.swipe-hint--lightbox{ left:50%; top:12px; transform: translateX(-50%) }

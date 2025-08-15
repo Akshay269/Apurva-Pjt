@@ -2,6 +2,7 @@
 import { createContext, useContext } from "react";
 import type { MediaItem } from "./Carousel";
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
+import { SwipeHint } from "./SwipeHint";
 
 type LightboxContextValue = {
   open: (item: MediaItem) => void;
@@ -29,6 +30,7 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
     ox: number;
     oy: number;
   } | null>(null);
+  const closeDragStartY = useRef<number | null>(null);
 
   const close = useCallback(() => {
     setItem(null);
@@ -68,28 +70,44 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
     });
   };
   const onPointerDown: React.PointerEventHandler<HTMLDivElement> = (e) => {
-    if (!item || item.type !== "image" || scale <= 1) return;
+    if (!item || item.type !== "image") return;
     const target = e.target as HTMLElement;
     if (target.closest(".lightbox__toolbar")) return;
     e.currentTarget.setPointerCapture(e.pointerId);
-    dragStart.current = {
-      x: e.clientX,
-      y: e.clientY,
-      ox: offset.x,
-      oy: offset.y,
-    };
+    if (scale > 1) {
+      dragStart.current = {
+        x: e.clientX,
+        y: e.clientY,
+        ox: offset.x,
+        oy: offset.y,
+      };
+    } else {
+      closeDragStartY.current = e.clientY;
+    }
   };
   const onPointerUp: React.PointerEventHandler<HTMLDivElement> = (e) => {
-    if (!dragStart.current) return;
-    e.currentTarget.releasePointerCapture(e.pointerId);
+    if (dragStart.current) {
+      e.currentTarget.releasePointerCapture(e.pointerId);
+    }
     dragStart.current = null;
+    closeDragStartY.current = null;
   };
   const onPointerMove: React.PointerEventHandler<HTMLDivElement> = (e) => {
-    if (!dragStart.current) return;
-    const { x, y, ox, oy } = dragStart.current;
-    const dx = e.clientX - x;
-    const dy = e.clientY - y;
-    setOffset({ x: ox + dx, y: oy + dy });
+    if (!item || item.type !== "image") return;
+    if (dragStart.current) {
+      const { x, y, ox, oy } = dragStart.current;
+      const dx = e.clientX - x;
+      const dy = e.clientY - y;
+      setOffset({ x: ox + dx, y: oy + dy });
+      return;
+    }
+    if (closeDragStartY.current !== null && scale <= 1) {
+      const dy = e.clientY - closeDragStartY.current;
+      if (dy > 120) {
+        closeDragStartY.current = null;
+        close();
+      }
+    }
   };
 
   const value = useMemo(() => ({ open }), [open]);
@@ -120,6 +138,13 @@ export const LightboxProvider: React.FC<{ children: React.ReactNode }> = ({
               <video className="lightbox__video" controls playsInline>
                 <source src={item.src} />
               </video>
+            )}
+            {item.type === "image" && scale <= 1 && (
+              <SwipeHint
+                direction="up-down"
+                text="Swipe down to close"
+                className="swipe-hint--lightbox"
+              />
             )}
             <div
               className="lightbox__toolbar"

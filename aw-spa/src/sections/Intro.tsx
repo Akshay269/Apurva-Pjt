@@ -1,8 +1,26 @@
 
 import TypingText from "../components/TypingText";
 import herovideo from "/assets/videos/Hero.mp4";
+import { useEffect, useState } from "react";
+import { SwipeHint } from "../components/SwipeHint";
 
 export const Intro = () => {
+  const [showHint, setShowHint] = useState(true);
+
+  useEffect(() => {
+    const dismiss = () => setShowHint(false);
+    const t = window.setTimeout(dismiss, 4000);
+    window.addEventListener("scroll", dismiss, { passive: true });
+    window.addEventListener("touchstart", dismiss, { passive: true });
+    window.addEventListener("wheel", dismiss, { passive: true });
+    return () => {
+      window.clearTimeout(t);
+      window.removeEventListener("scroll", dismiss as any);
+      window.removeEventListener("touchstart", dismiss as any);
+      window.removeEventListener("wheel", dismiss as any);
+    };
+  }, []);
+
   return (
     <section
       id="intro"
@@ -29,6 +47,12 @@ export const Intro = () => {
 
         <button className="see-work-btn" onClick={() => window.location.href="#work"}>See Work</button>
       </div>
+      <SwipeHint
+        direction="up-down"
+        text="Swipe to explore"
+        className="swipe-hint--hero"
+        visible={showHint}
+      />
     </section>
   );
 };

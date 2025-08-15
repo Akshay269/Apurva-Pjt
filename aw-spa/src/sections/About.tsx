@@ -3,6 +3,7 @@ import about from "/assets/images/about.png";
 export const About = () => {
   const contentRef = useRef<HTMLDivElement | null>(null);
   const [visible, setVisible] = useState(false);
+  
 
   useEffect(() => {
     const el = contentRef.current;

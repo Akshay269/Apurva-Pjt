@@ -76,6 +76,7 @@ export const Expertise = () => {
           </div>
         </div>
       </div>
+ 
     </section>
   );
 };

@@ -7,6 +7,7 @@ import { Work } from './sections/Work'
 import { Contact } from './sections/Contact'
 import { Footer } from './sections/Footer'
 import {LightboxProvider} from './components/LightboxContext'
+import { ScrollCube } from './components/ScrollCube'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Navbar />
         <main>
           <Intro />
+          <ScrollCube />
           <About />
           <Expertise />
           <Work />

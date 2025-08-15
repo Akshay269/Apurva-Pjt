@@ -84,8 +84,7 @@ export const Work = () => {
   return (
     <section id="work" className="section section--primary">
       <div className="container">
-        
-          <h2 className="prose h2">Our Creation</h2>
+        <h2 className="prose h2">Our Creation</h2>
 
 
         <div className="tabs">
@@ -112,6 +111,7 @@ export const Work = () => {
           <Carousel items={data.exterior} />
         </div>
       </div>
+     
     </section>
   );
 };

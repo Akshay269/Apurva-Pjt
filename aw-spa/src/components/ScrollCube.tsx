@@ -6,6 +6,11 @@ export const ScrollCube = () => {
   const sceneRef = useRef<HTMLDivElement | null>(null);
   const [stepIndex, setStepIndex] = useState(0);
   const [useSwipe, setUseSwipe] = useState(false);
+  const autoRotateRAFRef = useRef<number | null>(null);
+  const autoRotateStartTimestampRef = useRef<number | null>(null);
+  const isAutoRotateActiveRef = useRef(false);
+  const hasAutoRotatePlayedRef = useRef(false);
+  const AUTO_ROTATE_DURATION_MS = 5000;
 
   const steps = useMemo(
     () => [
@@ -27,12 +32,85 @@ export const ScrollCube = () => {
     return () => window.removeEventListener("resize", check);
   }, []);
 
+  // Start a 5s auto-rotate and block page scroll while active
+  const startAutoRotate = () => {
+    const cube = cubeRef.current;
+    if (!cube) return;
+    if (isAutoRotateActiveRef.current) return;
+    isAutoRotateActiveRef.current = true;
+    hasAutoRotatePlayedRef.current = true;
+    autoRotateStartTimestampRef.current = null;
+
+    const animate = (timestamp: number) => {
+      if (autoRotateStartTimestampRef.current == null) {
+        autoRotateStartTimestampRef.current = timestamp;
+      }
+      const elapsedMs = timestamp - autoRotateStartTimestampRef.current;
+      const clampedMs = Math.min(elapsedMs, AUTO_ROTATE_DURATION_MS);
+      const progress = clampedMs / AUTO_ROTATE_DURATION_MS;
+      const angleY = 720 * progress; // two full spins over 5s
+      const angleX = 432 * progress; // 1.2 spins for depth
+      cube.style.transform = `rotateX(${angleX}deg) rotateY(${angleY}deg)`;
+
+      if (elapsedMs < AUTO_ROTATE_DURATION_MS) {
+        autoRotateRAFRef.current = requestAnimationFrame(animate);
+      } else {
+        isAutoRotateActiveRef.current = false;
+        autoRotateRAFRef.current = null;
+      }
+    };
+
+    autoRotateRAFRef.current = requestAnimationFrame(animate);
+  };
+
+  // Intercept scroll gestures on the section: block page scroll and run auto-rotate once
+  useEffect(() => {
+    const section = sectionRef.current;
+    if (!section) return;
+
+    const onWheel = (e: WheelEvent) => {
+      if (!hasAutoRotatePlayedRef.current || isAutoRotateActiveRef.current) {
+        e.preventDefault();
+      }
+      if (!hasAutoRotatePlayedRef.current && !isAutoRotateActiveRef.current) {
+        startAutoRotate();
+      }
+    };
+
+    const onTouchMove = (e: TouchEvent) => {
+      if (!hasAutoRotatePlayedRef.current || isAutoRotateActiveRef.current) {
+        e.preventDefault();
+      }
+      if (!hasAutoRotatePlayedRef.current && !isAutoRotateActiveRef.current) {
+        startAutoRotate();
+      }
+    };
+
+    section.addEventListener("wheel", onWheel, { passive: false });
+    section.addEventListener("touchmove", onTouchMove, { passive: false });
+
+    return () => {
+      section.removeEventListener("wheel", onWheel);
+      section.removeEventListener("touchmove", onTouchMove);
+    };
+  }, []);
+
+  // Cancel any pending rAF on unmount
+  useEffect(() => {
+    return () => {
+      if (autoRotateRAFRef.current != null) {
+        cancelAnimationFrame(autoRotateRAFRef.current);
+      }
+    };
+  }, []);
+
   useEffect(() => {
     if (useSwipe) return;
     const onScroll = () => {
       const section = sectionRef.current;
       const cube = cubeRef.current;
       if (!section || !cube) return;
+      if (isAutoRotateActiveRef.current) return; // do not override while auto-rotating
 
       const rect = section.getBoundingClientRect();
       const viewH = window.innerHeight;
@@ -41,9 +119,7 @@ export const ScrollCube = () => {
         Math.max(0, (viewH - rect.top) / rect.height)
       );
       const rotation = progress * 360;
-      cube.style.transform = `rotateX(${
-        rotation * 0.6
-      }deg) rotateY(${rotation}deg)`;
+      cube.style.transform = `rotateX(${rotation * 0.6}deg) rotateY(${rotation}deg)`;
 
       const idx = Math.min(
         steps.length - 1,
@@ -81,9 +157,7 @@ export const ScrollCube = () => {
     // apply rotation for current step
     const applyRotation = (idx: number) => {
       const rotation = (idx / steps.length) * 360;
-      cube.style.transform = `rotateX(${
-        rotation * 0.6
-      }deg) rotateY(${rotation}deg)`;
+      cube.style.transform = `rotateX(${rotation * 0.6}deg) rotateY(${rotation}deg)`;
     };
     applyRotation(stepIndex);
 

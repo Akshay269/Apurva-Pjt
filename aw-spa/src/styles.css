@@ -8,7 +8,7 @@
 }
 @font-face {
   font-family: "MyFont1";
-  src: url("/fonts/Space.woff2") format("woff2");
+  src: url("/fonts/Dream-Avenue.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -67,7 +67,7 @@ html {
 }
 body {
   margin: 0;
-  font-family: MyFont, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
+  font-family: MyFont1, system-ui, -apple-system, Segoe UI, Roboto, Ubuntu,
     Cantarell, "Helvetica Neue", Arial, "Apple Color Emoji", "Segoe UI Emoji",
     "Segoe UI Symbol";
   color: var(--text);

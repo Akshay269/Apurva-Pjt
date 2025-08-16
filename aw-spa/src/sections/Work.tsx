@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Carousel, type MediaItem } from "../components/Carousel";
-import { FadeIn, SlideUp, StaggerContainer, StaggerItem } from "../components/ScrollAnimations";
+import { StaggerContainer, StaggerItem } from "../components/ScrollAnimations";
 import { SwipeReveal, SwipeCards, MagneticSwipe, GestureSwipe } from "../components/SwipeAnimations";
 
 const archInterior: MediaItem[] = [

@@ -18,43 +18,29 @@ export const Navbar = () => {
   useEffect(() => {
     const handleScroll = () => {
       const scrollY = window.scrollY;
-      
-      // Force intro when at the very top
       if (scrollY < 300) {
-        setActiveSection('intro');
+        setActiveSection("intro");
         return;
       }
-      
-      // Check sections in order from top to bottom
-      const sections = ['intro', 'about', 'expertise', 'work', 'contact'];
-      let newActiveSection = 'intro';
-      
+      const sections = ["intro", "about", "expertise", "work", "contact"];
+      let newActiveSection = "intro";
       sections.forEach((sectionId) => {
         const element = document.getElementById(sectionId);
         if (element) {
           const rect = element.getBoundingClientRect();
           const sectionTop = scrollY + rect.top;
           const sectionBottom = sectionTop + rect.height;
-          const viewportTop = scrollY + 100; // Account for navbar height
-          
-          // Section is active if viewport top is within the section
+          const viewportTop = scrollY + 100;
           if (viewportTop >= sectionTop && viewportTop < sectionBottom) {
             newActiveSection = sectionId;
           }
         }
       });
-      
-      // Debug logging (remove in production)
-      // console.log('Active section:', newActiveSection, 'ScrollY:', scrollY);
-      
       setActiveSection(newActiveSection);
     };
-
-    // Set initial state immediately
-    setTimeout(handleScroll, 100); // Small delay to ensure DOM is ready
-    window.addEventListener('scroll', handleScroll, { passive: true });
-    
-    return () => window.removeEventListener('scroll', handleScroll);
+    setTimeout(handleScroll, 100);
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navItems = [
@@ -66,7 +52,7 @@ export const Navbar = () => {
   ];
 
   return (
-    <motion.header 
+    <motion.header
       className={`navbar ${isScrolled ? "navbar--scrolled" : ""}`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
@@ -77,7 +63,7 @@ export const Navbar = () => {
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          style={{ display: 'flex', alignItems: 'center', gap: '12px' }}
+          style={{ display: "flex", alignItems: "center", gap: "12px" }}
         >
           <motion.img
             src={LOGO_WHITE}
@@ -86,8 +72,8 @@ export const Navbar = () => {
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2 }}
           />
-          <motion.a 
-            href="#intro" 
+          <motion.a
+            href="#intro"
             className="brand"
             whileHover={{ scale: 1.02 }}
             transition={{ duration: 0.2 }}
@@ -95,8 +81,8 @@ export const Navbar = () => {
             A.W Designers
           </motion.a>
         </motion.div>
-        
-        <motion.nav 
+
+        <motion.nav
           className="nav"
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -106,16 +92,16 @@ export const Navbar = () => {
             <motion.a
               key={item.id}
               href={item.href}
-              className={activeSection === item.id ? 'nav-active' : ''}
+              className={activeSection === item.id ? "nav-active" : ""}
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.3, delay: 0.1 * index }}
-              whileHover={{ 
+              whileHover={{
                 scale: 1.05,
-                color: "var(--primary)"
+                color: "var(--primary)",
               }}
               whileTap={{ scale: 0.95 }}
-              style={{ position: 'relative' }}
+              style={{ position: "relative" }}
             >
               {item.label}
               <AnimatePresence>
@@ -127,13 +113,13 @@ export const Navbar = () => {
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
                     style={{
-                      position: 'absolute',
-                      bottom: '-4px',
+                      position: "absolute",
+                      bottom: "-4px",
                       left: 0,
                       right: 0,
-                      height: '2px',
-                      background: 'var(--primary)',
-                      borderRadius: '1px'
+                      height: "2px",
+                      background: "var(--primary)",
+                      borderRadius: "1px",
                     }}
                   />
                 )}

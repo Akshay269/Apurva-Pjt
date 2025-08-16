@@ -7,7 +7,6 @@ import { Work } from './sections/Work'
 import { Contact } from './sections/Contact'
 import { Footer } from './sections/Footer'
 import { LightboxProvider } from './components/LightboxContext'
-import { RedCubeSection } from './components/RedCubeSection'
 
 function App() {
   return (
@@ -17,9 +16,8 @@ function App() {
         
         <main>
           <Intro />
-          
-          {/* Interactive Red Cube Section */}
-          <RedCubeSection onRotationComplete={() => console.log('Cube rotation completed!')} />
+        
+        
           
           <About />
           <Expertise />

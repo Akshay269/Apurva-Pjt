@@ -1,5 +1,5 @@
 import expertise from "/assets/images/expertise.png";
-import { SlideInLeft, SlideInRight, StaggerContainer, StaggerItem, ScaleIn } from "../components/ScrollAnimations";
+import { StaggerContainer, StaggerItem } from "../components/ScrollAnimations";
 import { SwipeReveal, MagneticSwipe, SwipeTextReveal } from "../components/SwipeAnimations";
 
 export const Expertise = () => {

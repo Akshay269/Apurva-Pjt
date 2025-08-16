@@ -1,5 +1,5 @@
 import about from "/assets/images/about.png";
-import { SlideInLeft, SlideInRight, StaggerContainer, StaggerItem } from "../components/ScrollAnimations";
+import { StaggerContainer, StaggerItem } from "../components/ScrollAnimations";
 import { SwipeReveal, SwipeTextReveal, MagneticSwipe } from "../components/SwipeAnimations";
 
 export const About = () => {

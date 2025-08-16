@@ -66,7 +66,7 @@ interface SwipeCardsProps {
 export const SwipeCards = ({ items, className = '' }: SwipeCardsProps) => {
   const [currentIndex, setCurrentIndex] = useState(0);
 
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
     const threshold = 50;
     
     if (info.offset.x > threshold && currentIndex > 0) {
@@ -286,7 +286,7 @@ export const GestureSwipe = ({
   className = '',
   threshold = 50
 }: GestureSwipeProps) => {
-  const handleDragEnd = (event: MouseEvent | TouchEvent | PointerEvent, info: PanInfo) => {
+  const handleDragEnd = (_: unknown, info: PanInfo) => {
     const { offset } = info;
     
     if (Math.abs(offset.x) > Math.abs(offset.y)) {

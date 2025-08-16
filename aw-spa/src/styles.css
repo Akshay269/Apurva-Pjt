@@ -6,16 +6,16 @@
   --primary: #6c8bfd;
   --accent: #9c6cfb;
 }
-/* @font-face {
+@font-face {
   font-family: "MyFont1";
-  src: url("../public//fonts/Space.woff2") format("woff2");
+  src: url("/fonts/Space.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
-} */
+}
 @font-face {
   font-family: "MyFont";
-  src: url("../public//fonts/kenao.woff2") format("woff2");
+  src: url("/fonts/kenao.woff2") format("woff2");
   font-weight: 400;
   font-style: normal;
   font-display: swap;
@@ -30,6 +30,40 @@ body,
 }
 html {
   scroll-behavior: smooth;
+}
+
+/* Enhanced scroll animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
 }
 body {
   margin: 0;
@@ -46,6 +80,8 @@ body {
 }
 .section {
   padding: 72px 0;
+  position: relative;
+  z-index: 2;
 }
 .section--light {
   background: #f4f6f8;
@@ -124,12 +160,565 @@ body {
   opacity: 1;
 }
 
+/* Enhanced navbar styles */
+.nav-active {
+  color: var(--primary) !important;
+  opacity: 1 !important;
+}
+
+.nav a {
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+/* Smooth scroll reveal utilities */
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-reveal.revealed {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Enhanced button hover effects */
+.btn {
+  transition: all 0.3s ease;
+  border: none;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+.btn--primary:hover {
+  background: #5a7bfc;
+}
+
+.btn--dark:hover {
+  background: #222;
+  border-color: #333;
+}
+
+/* Enhanced tab hover effects */
+.tab {
+  transition: all 0.3s ease;
+}
+
+.tab:hover:not(.tab--active) {
+  background: #1a1d21;
+  border-color: #3a3d43;
+  transform: translateY(-1px);
+}
+
+/* Work section enhancements */
+.work-group {
+  margin-bottom: 48px;
+}
+
+.work-group h3 {
+  font-size: 24px;
+  margin-bottom: 16px;
+  color: var(--text);
+}
+
+/* Smooth image loading */
+.about__image img,
+.expertise__image img {
+  transition: all 0.5s ease;
+}
+
+.about__image img:hover,
+.expertise__image img:hover {
+  transform: scale(1.02);
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Contact form enhancements */
+.contact-form input:focus,
+.contact-form select:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--primary);
+  box-shadow: 0 0 0 3px rgba(108, 139, 253, 0.1);
+}
+
+.contact-list {
+  margin: 16px 0;
+}
+
+.contact-list div {
+  margin: 8px 0;
+  padding: 8px 0;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Enhanced carousel */
+.carousel__item {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.carousel__item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Hero decorative elements */
+.hero-decoration {
+  pointer-events: none;
+}
+
+/* Swipe Animation Styles */
+.swipe-cards-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.swipe-cards-track {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.swipe-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: grab;
+  user-select: none;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
+
+.swipe-card:active {
+  cursor: grabbing;
+}
+
+.swipe-indicators {
+  position: absolute;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.swipe-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255, 255, 255, 0.4);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.swipe-indicator.active {
+  background: var(--primary);
+  transform: scale(1.2);
+}
+
+.swipe-indicator:hover {
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* Magnetic Elements */
+.magnetic-element {
+  cursor: pointer;
+  will-change: transform;
+}
+
+/* Swipe Text Reveal */
+.swipe-text-reveal {
+  overflow: hidden;
+  perspective: 1000px;
+}
+
+.swipe-word {
+  will-change: transform;
+}
+
+/* Page Swipe */
+.page-swipe {
+  position: absolute;
+  inset: 0;
+  will-change: transform;
+}
+
+/* Gesture Swipe */
+.gesture-swipe {
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+
+.gesture-swipe:active {
+  cursor: grabbing;
+}
+
+/* Swipe Reveal Animations */
+@keyframes swipeRevealLeft {
+  from {
+    transform: translateX(-100%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes swipeRevealRight {
+  from {
+    transform: translateX(100%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes swipeRevealUp {
+  from {
+    transform: translateY(-100%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes swipeRevealDown {
+  from {
+    transform: translateY(100%) scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0) scale(1);
+    opacity: 1;
+  }
+}
+
+/* Enhanced carousel with swipe */
+.carousel {
+  touch-action: pan-y;
+}
+
+.carousel__track {
+  touch-action: pan-y;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Work section swipe enhancements */
+.work-swipe-container {
+  position: relative;
+  overflow: hidden;
+  border-radius: 12px;
+  margin: 24px 0;
+}
+
+.work-swipe-card {
+  padding: 20px;
+  text-align: center;
+}
+
+.work-swipe-card img {
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  transition: all 0.3s ease;
+}
+
+.work-swipe-card:hover img {
+  transform: scale(1.05);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.work-swipe-section {
+  margin: 32px 0;
+}
+
+.work-carousel-fallback {
+  opacity: 0.7;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 32px;
+}
+
+/* Enhanced swipe text reveal for h2 */
+.swipe-text-reveal.h2 {
+  font-size: 40px;
+  margin: 0 0 12px;
+  font-weight: bold;
+}
+
+/* Rocket Animation Styles */
+.rocket-swipe-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.rocket {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  will-change: transform;
+}
+
+.rocket-body {
+  font-size: 48px;
+  filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.5));
+  z-index: 2;
+}
+
+.rocket-trail {
+  position: absolute;
+  top: 40px;
+  width: 4px;
+  height: 80px;
+  background: linear-gradient(to bottom, 
+    rgba(255, 165, 0, 0.8) 0%,
+    rgba(255, 69, 0, 0.6) 30%,
+    rgba(255, 0, 0, 0.4) 60%,
+    transparent 100%
+  );
+  border-radius: 2px;
+  transform-origin: top center;
+}
+
+.explosion {
+  position: absolute;
+  width: 200px;
+  height: 200px;
+  pointer-events: none;
+}
+
+.explosion-particle {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  background: radial-gradient(circle, #ffff00, #ff4444);
+  border-radius: 50%;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.swipe-text-container {
+  display: flex;
+  gap: 8px;
+  perspective: 1000px;
+}
+
+.swipe-letter {
+  font-size: 72px;
+  font-weight: 900;
+  color: #fff;
+  text-shadow: 
+    0 0 10px rgba(255, 68, 68, 0.8),
+    0 0 20px rgba(255, 68, 68, 0.6),
+    0 0 30px rgba(255, 68, 68, 0.4);
+  cursor: pointer;
+  user-select: none;
+  will-change: transform;
+}
+
+.swipe-hint {
+  position: absolute;
+  bottom: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 16px;
+  text-align: center;
+}
+
+.swipe-arrow {
+  padding: 8px 16px;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+/* Rocket Demo Styles */
+.rocket-demo {
+  text-align: center;
+  padding: 40px;
+}
+
+.demo-button {
+  padding: 12px 24px;
+  font-size: 18px;
+  background: linear-gradient(45deg, #ff4444, #ff6666);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(255, 68, 68, 0.4);
+}
+
+.demo-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(255, 68, 68, 0.6);
+}
+
+/* Scrolling Cube Styles */
+.scrolling-cube-container {
+  will-change: transform;
+}
+
+.scrolling-cube {
+  position: relative;
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.cube-face {
+  position: absolute;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 0 20px rgba(255, 68, 68, 0.3),
+    inset 0 0 20px rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+.cube-shadow {
+  position: absolute;
+  width: 60px;
+  height: 60px;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 68, 68, 0.3) 0%,
+    rgba(255, 68, 68, 0.1) 50%,
+    transparent 100%
+  );
+  border-radius: 50%;
+  filter: blur(8px);
+  will-change: transform;
+}
+
+.cube-particle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(255, 68, 68, 0.6);
+  will-change: transform;
+}
+
+/* Cube Cluster */
+.cube-cluster {
+  position: relative;
+  pointer-events: none;
+}
+
+/* Interactive Cube */
+.interactive-cube-container {
+  position: relative;
+  width: 100%;
+  height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.interactive-overlay {
+  position: absolute;
+  pointer-events: none;
+  will-change: transform;
+}
+
+.magnetic-field {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 0.6;
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .rocket-swipe-container {
+    height: 300px;
+  }
+  
+  .swipe-letter {
+    font-size: 48px;
+  }
+  
+  .rocket-body {
+    font-size: 36px;
+  }
+  
+  .scrolling-cube {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .cube-face {
+    width: 40px !important;
+    height: 40px !important;
+  }
+  
+  .cube-shadow {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+/* Mobile swipe optimizations */
+@media (max-width: 900px) {
+  .swipe-cards-container {
+    height: 300px;
+  }
+  
+  .swipe-card {
+    padding: 20px;
+  }
+  
+  .swipe-indicators {
+    bottom: 10px;
+  }
+}
+
 /* Hero */
 .section--hero {
   position: relative;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   align-items: center;
+  padding: 0 !important;
+  margin-bottom: 0;
+  z-index: 1;
 }
 .hero__media {
   position: absolute;

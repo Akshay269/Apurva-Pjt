@@ -6,6 +6,7 @@ export const Footer = () => {
         <nav className="footer__links">
           <a href="#intro">Intro</a>
           <a href="#about">About</a>
+          <a href="#expertise">Expertise</a>
           <a href="#work">Work</a>
           <a href="#contact">Contact</a>
         </nav>
